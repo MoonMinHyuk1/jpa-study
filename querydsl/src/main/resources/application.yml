@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/querydsl?serverTimezone=Asia/Seoul
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://pablocompdb.ceuh1eb5w34m.ap-northeast-2.rds.amazonaws.com:3306/PabloCompDb?serverTimezone=Asia/Seoul
+#    username: Pablo
+#    password: vkqmffh1!
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+        use_sql_comments: true
+
+logging.level:
+  org.hibernate.SQL: debug
+  #org.hibernate.type: trace
