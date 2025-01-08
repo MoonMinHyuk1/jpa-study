@@ -6,3 +6,10 @@ spring:
     url: jdbc:mysql://localhost:3301/repeat
     username: user
     password: user
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
