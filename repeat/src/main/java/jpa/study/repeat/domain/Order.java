@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,17 +20,43 @@ public class Order {
     @GeneratedValue
     @Column(name = "order_id")
     private Long id;
-    @Column(name = "member_id")
-    private Long memberId;
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
     @Builder
-    public Order(Long memberId, Date orderDate, OrderStatus status) {
-        this.memberId = memberId;
+    public Order(Date orderDate, OrderStatus status) {
         this.orderDate = orderDate;
         this.status = status;
+    }
+
+    //==연관관계 메서드==//
+    public void setMember(Member member) {
+        //기존 관계 제거
+        if (this.member != null) {
+            this.member.getOrders().remove(this);
+        }
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderDate=" + orderDate +
+                ", status=" + status +
+                '}';
     }
 }

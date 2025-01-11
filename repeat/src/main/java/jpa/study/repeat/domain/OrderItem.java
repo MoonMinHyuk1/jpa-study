@@ -15,18 +15,26 @@ public class OrderItem {
     @GeneratedValue
     @Column(name = "order_item_id")
     private Long id;
-    @Column(name = "item_id")
-    private Long itemId;
-    @Column(name = "order_id")
-    private Long orderId;
     private int orderPrice;
     private int count;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    public OrderItem(Long itemId, Long orderId, int orderPrice, int count) {
-        this.itemId = itemId;
-        this.orderId = orderId;
+    public OrderItem(int orderPrice, int count) {
         this.orderPrice = orderPrice;
         this.count = count;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
