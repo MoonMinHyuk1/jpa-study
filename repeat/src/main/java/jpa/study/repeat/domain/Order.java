@@ -29,6 +29,9 @@ public class Order {
     private Member member;
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     @Builder
     public Order(Date orderDate, OrderStatus status) {
@@ -49,6 +52,11 @@ public class Order {
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
     }
 
     @Override

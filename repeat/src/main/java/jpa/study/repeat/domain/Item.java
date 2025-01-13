@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Table(name = "item")
@@ -19,6 +22,8 @@ public class Item {
     private String name;
     private int price;
     private int stockQuantity;
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<Category>();
 
     @Builder
     public Item(String name, int price, int stockQuantity) {
