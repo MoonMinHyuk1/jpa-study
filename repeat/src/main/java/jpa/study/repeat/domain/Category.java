@@ -1,6 +1,8 @@
 package jpa.study.repeat.domain;
 
 import jakarta.persistence.*;
+import jpa.study.repeat.domain.common.BaseEntity;
+import jpa.study.repeat.domain.item.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,7 @@ import java.util.List;
 @Getter
 @Table(name = "category")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Category {
+public class Category extends BaseEntity {
 
     @Id
     @GeneratedValue

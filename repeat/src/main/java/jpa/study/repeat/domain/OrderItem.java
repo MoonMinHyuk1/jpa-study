@@ -1,6 +1,8 @@
 package jpa.study.repeat.domain;
 
 import jakarta.persistence.*;
+import jpa.study.repeat.domain.common.BaseEntity;
+import jpa.study.repeat.domain.item.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "order_item")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @GeneratedValue
